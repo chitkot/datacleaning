@@ -1,8 +1,9 @@
 # GETTING AND CLEANING DATA: COURSE PROJECT ASSIGNMENT
 
-# NOTE: THIS SCRIPT ASSUMES THAT THE FOLLOWING FILES HAVE BEEN DOWNLOADED AND
-# PLACED IN THE WORKING DIRECTORY: X_test.txt, y_test.tx subject_test.tx, X-train.tx, y_train.tx, subject_train.tx, features.tx, activity_labels.txt 
-# THESE FILES ARE FROM THE DATASET: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
+# NOTE: THIS SCRIPT ASSUMES THAT SUMSUNG DATA HAVE BEEN DOWNLOADED AND PLACE IN THE WORKING DIRECTORY,
+# particularly the following files: X_test.txt, y_test.tx subject_test.tx, X-train.tx, y_train.tx, 
+# subject_train.tx, features.tx, activity_labels.txt 
+# THE ORIGINAL DATASET IS AVAILABLE AT: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
 
 # Set the working directory in which the files above are located (the directory will differ depending on your computer)
@@ -19,7 +20,7 @@ dim(xTest) # View the data set dimension
 xTrain <- read.table("X_train.txt")
 dim(xTrain) # view the data set dimension
 
-# Combing the two datasets ("xTrain" and "xTrain" ) by appending one to the other; call the merged dataset "xMerged"
+# Combing the two datasets ("xTrain" and "xTrain") by appending one to the other; call the merged dataset "xMerged"
 xMerged <- rbind(xTest, xTrain)
 dim(xMerged) # View the dataset dimension
 
