@@ -1,0 +1,32 @@
+Getting and Cleaning Data: Course Project
+========================================================
+Human Activity Recognition using Smartphone Dataset
+Subset of the original dataset
+========================================================
+
+This dataset was generated from a larger dataset from the experiements conducted with 30 individuals who performed six activities (Walking, Walking-Upstairs, Walking-Downstairs, Sitting, Standing, and Laying) wearing the smartphone Galaxy S II on the waist. Information about these experiments is available at: 
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones. The original dataset for the project is available at: 
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
+
+This subset of the larger dataset was generated using the following steps:
+1. The test and training data sets were combined into a larger dataset
+2. Measurements of the mean and standard deviation were extracted to create a smaller dataset. All the variables whose names included "mean" or "std" were retained in the new dataset. 
+3. Subject data and activity data (for both test and training groups) were merged with the measurement dataset.
+4. New variables names were manually created from the original names and were added to the data set
+5. The resulting datase was melted into a long, thin data set: Variables that identified subject and activities were preserved, all measurement variables were melted into a single column
+6. Finally the dataset was recast by computing the average value for values of each measurement variable, by subject and by activity.
+
+For each record in the dataset, it is provided the following:
+=============================================================
+* The identification number for the subject who performed the activity
+* The description of the activity that the subject perfromed 
+* The average value, for each subject and each activity, for each measurement on the mean and standard deviation of the variables in the original dataset.
+
+The dataset includes the following files:
+=========================================
+* 'README.txt'
+* 'measuresMeanStdRecast.txt': Tidy dataset created using the steps described above
+* 'CodeBook.md': Codebook describing the variables
+* 'run_analysis.R': The script for performing the analysis and describing all the data cleaning workd performed.
+
+
