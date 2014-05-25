@@ -1,26 +1,139 @@
-Title
+Human Activity Recognition using Smartphone Dataset
+Subset of the original dataset
 ========================================================
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring web pages (click the **Help** toolbar button for more details on using R Markdown).
+STUDY DESIGN
+============
 
-When you click the **Knit HTML** button a web page will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+This dataset was extracted from the Sumsung dataset available at:  
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
+The original dataset was part of an experiment conducted with 30 volunteers who were asked to perform 6 activities while wearing the smartphone Samsung Galaxy S II on the wrist. 
+Information about these experiments is available at: 
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones.
+
+I created the subset of the dataset by following these steps:  
+
+1. Combined the the test and training sets into a larger dataset
+2. Extracted measurements of the mean and standard deviation and created a smaller dataset. I limited this new dataset to measurements of mean and standard deviations, by searching the variable names and extracting variables that had "mean" or "std" as part of the name. 
+3. Merged this measurement dataset with data on subject and activities.
+4. Manually created new variable names and labeled the data with the appropriate names.
+5. Melted resulting dataset into a long, thin data set: Variables that identified subject and activities were preserved; all measurement variables were melted into a single column
+6. Recast the dataset and computed the average value for values of each measurement variable, by subject and by activity.
+
+VARIABLE NAMING CONVENTIONS
+===========================
+
+With the exception subject and activity variables, all the measurement variables follow some of the naming conventions that were used in the original dataset: 
+
+* ACC: Accelerometer sensor signal
+* GYRO: Gyroscope sensor signal
+* X: Signal in the X direction
+* Y: Signal in the Y direction
+* Z: Signal in the Z direction
+* t: Time domain
+* f: Frequeny domain
+* body: body motion component
+* gravity: gravitational component
+* Mean: Mean value
+* Std: Standard deviation
+* Mag: Magnitude
+
+VARIABLE DESCRIPTION
+====================
+
+| Variable Number | Variable Name                     | Variable type | Variable description                                                                                                | Min     | Max     |
+|-----------------|-----------------------------------|---------------|---------------------------------------------------------------------------------------------------------------------|---------|---------|
+| 1               | subjectId                         | Integer       | ID number for the subject who performed the activity                                                                | 1       | 30      |
+| 2               | activity                          | Character     | Description of the 6 activity performed (walking, waling downstairs, walking upstairs, sitting, standing, laying)   |         |         |
+| 3               | tBodyAccMeanX                     | Numeric       | Average of the mean values for body acceleration signals, time domain, X direction                                  | 0.2216  | 0.3015  |
+| 4               | tBodyAccMeanY                     | Numeric       | Average of the mean values for body acceleration signals, time domain, Y direction                                  | -0.0405 | -0.0013 |
+| 5               | tBodyAccMeanZ                     | Numeric       | Average of the mean values for body acceleration signals, time domain, Z direction                                  | -0.1525 | -0.0754 |
+| 6               | tBodyAccStdX                      | Numeric       | Average standard deviation of body acceleration signals, time domain, X direction                                   | -0.9961 | 0.6269  |
+| 7               | tBodyAccStdY                      | Numeric       | Average standard deviation of body acceleration signals, time domain, Y direction                                   | -0.9902 | 0.6169  |
+| 8               | tBodyAccStdZ                      | Numeric       | Average standard deviation of body acceleration signals, time domain, Z direction                                   | -0.9877 | 0.609   |
+| 9               | tGravityAccMeanX                  | Numeric       | Average of the mean values for gravitational acceleration signals, time domain, X direction                         | -0.68   | 0.9745  |
+| 10              | tGravityAccMeanY                  | Numeric       | Average of the mean values for gravitational acceleration signals, time domain, Y direction                         | -0.4799 | 0.9566  |
+| 11              | tGravityAccMeanZ                  | Numeric       | Average of the mean values for gravitational acceleration signals, time domain, Z direction                         | -0.4951 | 0.9579  |
+| 12              | tGravityAccStdX                   | Numeric       | Average standard deviation of gravitational acceleration signals, time domain, X direction                          | -0.9968 | -0.8296 |
+| 13              | tGravityAccStdY                   | Numeric       | Average standard deviation of gravitational acceleration signals, time domain, Y direction                          | -0.9942 | -0.6436 |
+| 14              | tGravityAccStdZ                   | Numeric       | Average standard deviation of gravitational acceleration signals, time domain, Z direction                          | -0.991  | -0.6102 |
+| 15              | tBodyAccJerkMeanX                 | Numeric       | Average of the mean values for Jerk body acceleration signals, time domain, X direction                             | 0.0427  | 0.1302  |
+| 16              | tBodyAccJerkMeanY                 | Numeric       | Average of the mean values for Jerk body acceleration signals, time domain, Y direction                             | -0.0387 | 0.0568  |
+| 17              | tBodyAccJerkMeanZ                 | Numeric       | Average of the mean values for Jerk body acceleration signals, time domain, Z direction                             | -0.0675 | 0.0381  |
+| 18              | tBodyAccJerkStdX                  | Numeric       | Average standard deviation of Jerk body acceleration signals, time domain, X direction                              | -0.9946 | 0.5443  |
+| 19              | tBodyAccJerkStdY                  | Numeric       | Average standard deviation of Jerk body acceleration signals, time domain, Y direction                              | -0.9895 | 0.3553  |
+| 20              | tBodyAccJerkStdZ                  | Numeric       | Average standard deviation of Jerk body acceleration signals, time domain, Z direction                              | -0.9933 | 0.031   |
+| 21              | tBodyGyroMeanX                    | Numeric       | Average of the mean values for body gyroscope signals, time domain, X direction                                     | -0.2058 | 0.1927  |
+| 22              | tBodyGyroMeanY                    | Numeric       | Average of the mean values for body gyroscope signals, time domain, Y direction                                     | -0.2042 | 0.0275  |
+| 23              | tBodyGyroMeanZ                    | Numeric       | Average of the mean values for body gyroscope signals, time domain, Z direction                                     | -0.0725 | 0.1791  |
+| 24              | tBodyGyroStdX                     | Numeric       | Average standard deviation of body gyroscope signals, time domain, X direction                                      | -0.9943 | 0.2677  |
+| 25              | tBodyGyroStdY                     | Numeric       | Average standard deviation of body gyroscope signals, time domain, Y direction                                      | -0.9942 | 0.4765  |
+| 26              | tBodyGyroStdZ                     | Numeric       | Average standard deviation of body gyroscope signals, time domain, Z direction                                      | -0.9855 | 0.5649  |
+| 27              | tBodyGyroJerkMeanX                | Numeric       | Average of the mean values for Jerk body gyroscope signals, time domain, X direction                                | -0.1572 | -0.0221 |
+| 28              | tBodyGyroJerkMeanY                | Numeric       | Average of the mean values for Jerk body gyroscope signals, time domain, Y direction                                | -0.0768 | -0.0132 |
+| 29              | tBodyGyroJerkMeanZ                | Numeric       | Average of the mean values for Jerk body gyroscope signals, time domain, Z direction                                | -0.0925 | -0.0069 |
+| 30              | tBodyGyroJerkStdX                 | Numeric       | Average standard deviation of Jerk body gyroscope signals, time domain, X direction                                 | -0.9965 | 0.1791  |
+| 31              | tBodyGyroJerkStdY                 | Numeric       | Average standard deviation of Jerk body gyroscope signals, time domain, Y direction                                 | -0.9971 | 0.2959  |
+| 32              | tBodyGyroJerkStdZ                 | Numeric       | Average standard deviation of Jerk body gyroscope signals, time domain, Z direction                                 | -0.9954 | 0.1932  |
+| 33              | tBodyAccMagMean                   | Numeric       | Average of the mean values for magnitude of body acceleration signals, time domain                                  | -0.9865 | 0.6446  |
+| 34              | tBodyAccMagStd                    | Numeric       | Average standard deviation of magnitude of body acceleration signals, time domain                                   | -0.9865 | 0.4284  |
+| 35              | tGravityAccMagMean                | Numeric       | Average of the mean values for magnitude of gravitational acceleration, time domain                                 | -0.9865 | 0.6446  |
+| 36              | tGravityAccMagStd                 | Numeric       | Average standard deviation of magnitude of gravitational acceleration, time domain                                  | -0.9865 | 0.4284  |
+| 37              | tBodyAccJerkMagMean               | Numeric       | Average of the mean values for magnitude of Jerk body acceleration signals, time domain                             | -0.9928 | 0.4345  |
+| 38              | tBodyAccJerkMagStd                | Numeric       | Average standard deviation of magnitude of Jerk body acceleration signals, time domain                              | -0.9946 | 0.4506  |
+| 39              | tBodyGyroMagMean                  | Numeric       | Average of the mean values for magnitude of body gyroscope signals, time domain                                     | -0.9807 | 0.418   |
+| 40              | tBodyGyroMagStd                   | Numeric       | Average standard deviation of magnitude of body gyroscope signals, time domain                                      | -0.9814 | 0.3     |
+| 41              | tBodyGyroJerkMagMean              | Numeric       | Average of the mean values for magnitude of Jerk body gyroscope signals, time domain                                | -0.9973 | 0.0876  |
+| 42              | tBodyGyroJerkMagStd               | Numeric       | Average standard deviation of magnitude of Jerk body gyroscope signals, time domain                                 | -0.9977 | 0.2502  |
+| 43              | fBodyAccMeanX                     | Numeric       | Average of the mean values for body acceleration signals, frequency domain, X direction                             | -0.9952 | 0.537   |
+| 44              | fBodyAccMeanY                     | Numeric       | Average of the mean values for body acceleration signals, frequency domain, Y direction                             | -0.989  | 0.5242  |
+| 45              | fBodyAccMeanZ                     | Numeric       | Average of the mean values for body acceleration signals, frequency domain, Z direction                             | -0.9895 | 0.2807  |
+| 46              | fBodyAccStdX                      | Numeric       | Average standard deviation of body acceleration signals, frequency domain, X direction                              | -0.9966 | 0.6585  |
+| 47              | fBodyAccStdY                      | Numeric       | Average standard deviation of body acceleration signals, frequency domain, Y direction                              | -0.9907 | 0.5602  |
+| 48              | fBodyAccStdZ                      | Numeric       | Average standard deviation of body acceleration signals, frequency domain, Z direction                              | -0.9872 | 0.6871  |
+| 49              | fBodyAccMeanFreqX                 | Numeric       | Average of weighed averages of frequeny component for body acceleration signals, frequency domain, X direction      | -0.6359 | 0.1591  |
+| 50              | fBodyAccMeanFreqY                 | Numeric       | Average of weighed averages of frequeny component for body acceleration signals, frequency domain, Y direction      | -0.3795 | 0.4665  |
+| 51              | fBodyAccMeanFreqZ                 | Numeric       | Average of weighed averages of frequeny component for body acceleration signals, frequency domain, Z direction      | -0.5201 | 0.4025  |
+| 52              | fBodyAccJerkMeanX                 | Numeric       | Average of the mean values for Jerk body acceleration signals, frequency domain, X direction                        | -0.9946 | 0.4743  |
+| 53              | fBodyAccJerkMeanY                 | Numeric       | Average of the mean values for Jerk body acceleration signals, frequency domain, Y direction                        | -0.9894 | 0.2767  |
+| 54              | fBodyAccJerkMeanZ                 | Numeric       | Average of the mean values for Jerk body acceleration signals, frequency domain, Z direction                        | -0.992  | 0.1578  |
+| 55              | fBodyAccJerkStdX                  | Numeric       | Average standard deviation of Jerk body acceleration signals, frequency domain, X direction                         | -0.9951 | 0.4768  |
+| 56              | fBodyAccJerkStdY                  | Numeric       | Average standard deviation of Jerk body acceleration signals, frequency domain, Y direction                         | -0.9905 | 0.3498  |
+| 57              | fBodyAccJerkStdZ                  | Numeric       | Average standard deviation of Jerk body acceleration signals, frequency domain, Z direction                         | -0.9931 | -0.0062 |
+| 58              | fBodyAccJerkMeanFreqX             | Numeric       | Average of weighed averages of frequeny component for Jerk body acceleration signals, frequency domain, X direction | -0.576  | 0.3314  |
+| 59              | fBodyAccJerkMeanFreqY             | Numeric       | Average of weighed averages of frequeny component for Jerk body acceleration signals, frequency domain, Y direction | -0.602  | 0.1957  |
+| 60              | fBodyAccJerkMeanFreqZ             | Numeric       | Average of weighed averages of frequeny component for Jerk body acceleration signals, frequency domain, Z direction | -0.6276 | 0.2301  |
+| 61              | fBodyGyroMeanX                    | Numeric       | Average of the mean values for body gyroscope signals, frequency domain, X direction                                | -0.9931 | 0.475   |
+| 62              | fBodyGyroMeanY                    | Numeric       | Average of the mean values for body gyroscope signals, frequency domain, Y direction                                | -0.994  | 0.3288  |
+| 63              | fBodyGyroMeanZ                    | Numeric       | Average of the mean values for body gyroscope signals, frequency domain, Z direction                                | -0.986  | 0.4924  |
+| 64              | fBodyGyroStdX                     | Numeric       | Average standard deviation of body gyroscope signals, frequency domain, X direction                                 | -0.9947 | 0.1966  |
+| 65              | fBodyGyroStdY                     | Numeric       | Average standard deviation of body gyroscope signals, frequency domain, Y direction                                 | -0.9944 | 0.6462  |
+| 66              | fBodyGyroStdZ                     | Numeric       | Average standard deviation of body gyroscope signals, frequency domain, Z direction                                 | -0.9867 | 0.5225  |
+| 67              | fBodyGyroMeanFreqX                | Numeric       | Average of weighed averages of frequeny component for body gyroscope signals, frequency domain, X direction         | -0.3958 | 0.2492  |
+| 68              | fBodyGyroMeanFreqY                | Numeric       | Average of weighed averages of frequeny component for body gyroscope signals, frequency domain, Y direction         | -0.6668 | 0.2731  |
+| 69              | fBodyGyroMeanFreqZ                | Numeric       | Average of weighed averages of frequeny component for body gyroscope signals, frequency domain, Z direction         | -0.5075 | 0.3771  |
+| 70              | fBodyAccMagMean                   | Numeric       | Average of the mean values for magnitude of body acceleration signals, frequency domain                             | -0.9868 | 0.5866  |
+| 71              | fBodyAccMagStd                    | Numeric       | Average standard deviation of magnitude of body acceleration signals, frequency domain                              | -0.9876 | 0.1787  |
+| 72              | fBodyAccMagMeanFreq               | Numeric       | Average of weighed averages of frequeny component for magnitude of body acceleration signals, frequency domain      | -0.3123 | 0.4358  |
+| 73              | fBodyBodyAccJerkMagMean           | Numeric       | Average of the mean values for magnitude of Jerk body acceleration signals, frequency domain                        | -0.994  | 0.5384  |
+| 74              | fBodyBodyAccJerkMagStd            | Numeric       | Average standard deviation of magnitude of Jerk body acceleration signals, frequency domain                         | -0.9944 | 0.3163  |
+| 75              | fBodyBodyAccJerkMagMeanFreq       | Numeric       | Average of weighed averages of frequeny component for magnitude of Jerk body acceleration signals, frequency domain | -0.1252 | 0.4881  |
+| 76              | fBodyBodyGyroMagMean              | Numeric       | Average of the mean values for magnitude of gyroscope body signalsfrequency domain                                  | -0.9865 | 0.204   |
+| 77              | fBodyBodyGyroMagStd               | Numeric       | Average standard deviation of magnitude of body gyroscope signals, frequency domain                                 | -0.9815 | 0.2367  |
+| 78              | fBodyBodyGyroMagMeanFreq          | Numeric       | Average of weighed averages of frequeny component for magnitude of body gyroscope signals, frequency domain         | -0.4566 | 0.4095  |
+| 79              | fBodyBodyGyroJerkMagMean          | Numeric       | Average of the mean values for magnitude of Jerk body gyroscope signals, frequency domain                           | -0.9976 | 0.1466  |
+| 80              | fBodyBodyGyroJerkMagStd           | Numeric       | Average standard deviation of magnitude of Jerk body gyroscope signals, frequency domain                            | -0.9976 | 0.2878  |
+| 81              | fBodyBodyGyroJerkMagMeanFreq      | Numeric       | Average of weighed averages of frequeny component for magnitude of Jerk body gyroscope signals, frequency domain    | -0.1829 | 0.4263  |
+| 82              | angletBodyAccMeanGravity          | Numeric       | Average of the values of gravity mean for angular body acceleration signals,time domain                             | -0.163  | 0.1292  |
+| 83              | angletBodyAccJerkMeanGravityMean  | Numeric       | Average of the values of gravity mean for angular Jerk body acceleration signals,time domain                        | -0.1206 | 0.2033  |
+| 84              | angletBodyGyroMeanGravityMean     | Numeric       | Average of the values of gravity mean for angular Jerk body gyroscope signals,time domain                           | -0.3893 | 0.4441  |
+| 85              | angletBodyGyroJerkMeanGravityMean | Numeric       | Average of the values of gravity mean for angular Jerk body gyroscope signals,time domain                           | -0.2237 | 0.1824  |
+| 86              | angleXGravityMean                 | Numeric       | Average of the values of gravity mean for angle X                                                                   | -0.9471 | 0.7378  |
+| 87              | angleYGravityMean                 | Numeric       | Average of the values of gravity mean for angleY                                                                    | -0.8746 | 0.4248  |
+| 88              | angleZGravityMean                 | Numeric       | Average of the values of gravity mean for angle Z                                                                   | -0.8736 | 0.3904  |
 
 
 
-So long as your readme describes your process and the code book describes the variables in you tidy data, as long as there is variables plus descriptions the exact format is not important
 
 
-
-
-
-```{r}
-summary(cars)
-```
-
-You can also embed plots, for example:
-
-```{r fig.width=7, fig.height=6}
-plot(cars)
-```
-
-
+            

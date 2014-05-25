@@ -4,7 +4,7 @@ Human Activity Recognition using Smartphone Dataset
 Subset of the original dataset
 ========================================================
 
-This dataset was generated from a larger dataset from the experiements conducted with 30 individuals who performed six activities (Walking, Walking-Upstairs, Walking-Downstairs, Sitting, Standing, and Laying) wearing the smartphone Galaxy S II on the waist. 
+This dataset was generated from a larger dataset from the experiements conducted with 30 individuals who performed six activities (Walking, Walking-Upstairs, Walking-Downstairs, Sitting, Standing, and Laying) wearing the smartphone Samsung Galaxy S II on the wrist. 
 Information about these experiments is available at: 
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones. 
 The original dataset for the project is available at: 
