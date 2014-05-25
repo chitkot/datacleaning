@@ -4,6 +4,7 @@
 # PLACED IN THE WORKING DIRECTORY: X_test.txt, y_test.tx subject_test.tx, X-train.tx, y_train.tx, subject_train.tx, features.tx, activity_labels.txt 
 # THESE FILES ARE FROM THE DATASET: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
+
 # Set the working directory in which the files above are located (the directory will differ depending on your computer)
 setwd("C:/Users/irefck/SkyDrive/1 COURSES/Coursera Courses/DATA SCIENCE SPECIALIZATION/3 Getting and Cleaning Data/Course Project")
 
@@ -64,7 +65,6 @@ measuresMeanStd <- subset(xMerged, select = c(1,2,3,4,5,6,41,42,43,44,45,46,81,8
                                              557,558,559,560,561))
 dim(measuresMeanStd) # View the dimension of the resulting dataset
 
-
 # Add the subject and activity data to the "MeanStdMeasure" dataset
 
   # Combine subject_test and subject_train data (these are subject ids)
@@ -75,7 +75,6 @@ subjectMerged <- rbind(subjectTest, subjectTrain) # Combine subject_test data an
   # Name the subject variable (V1) "subjectId"
 library(reshape)
 subjectMerged <- rename(subjectMerged, c(V1="subjectId"))
-
 
   # Combine y_test and y_train data (these are activity codes) 
 yTest <- read.table("y_test.txt") # Import activity codes for test data
@@ -108,6 +107,7 @@ measuresMeanStd <- join_all(dfList) # Join the three datasets (joins by "rowId")
 measuresMeanStd$rowId <- NULL
 
 
+
 # STEP 3. Use descriptive activity names to name the activities in the data set
 
 # Import activity labels (activity_labels)
@@ -123,11 +123,11 @@ measuresMeanStd$activity[measuresMeanStd$activity==5] <- "Standing" # Replace 5 
 measuresMeanStd$activity[measuresMeanStd$activity==6] <- "Laying" # Replace 6 with "Laying"
 
 
-# STEP 4. Appropriately labels the data set with descriptive activity names (.
-# In other words, give variable names that describe the kind of action being measured by the variable 
+
+# STEP 4. Appropriately labels the data set with descriptive activity names
 
 # Extract and view the original activity names for the variables with means and std measurements
-featuresMeanStd[,"V2"] # Extract the second column (V2), which contains
+featuresMeanStd[,"V2"] # Extract the second column (V2), which contains the variable names
 
 # Manually edited original names and created a vector containing new variable names by doing the following:
   # 1. Capitalized the first letter of "mean" and the first letter of "std"
@@ -136,7 +136,8 @@ featuresMeanStd[,"V2"] # Extract the second column (V2), which contains
   # 3. Preserve everything else in the variable names, so that the new names are closer to the original variable names
   # Note: Included "subjectId" and "activity" at the beginning of the vector, to ensure that measurement names  
   # in the resulting vector match with appropriate measurement columns in the dataset
-# The resulting vector was as follows:
+
+# The resulting vector of variable names was as follows:
 varNames <- c("subjectId","activity","tBodyAccMeanX","tBodyAccMeanY","tBodyAccMeanZ","tBodyAccStdX",
                       "tBodyAccStdY","tBodyAccStdZ","tGravityAccMeanX","tGravityAccMeanY",
                       "tGravityAccMeanZ","tGravityAccStdX","tGravityAccStdY","tGravityAccStdZ",
@@ -161,10 +162,9 @@ varNames <- c("subjectId","activity","tBodyAccMeanX","tBodyAccMeanY","tBodyAccMe
                       "angletBodyGyroMeanGravityMean","angletBodyGyroJerkMeanGravityMean",
                       "angleXGravityMean","angleYGravityMean","angleZGravityMean")
 
-names(measuresMeanStd) <- varNames
+names(measuresMeanStd) <- varNames # Assign the variable names to the columns in the dataset
 names(measuresMeanStd) # Verify that columns have been named appropriately
 head(measuresMeanStd, n=2) # View first 2 observations
-
 
 
 
@@ -205,26 +205,3 @@ measuresMeanStdMelt <- melt(measuresMeanStd, id=c("subjectId","activity"),
 measuresMeanStdRecast <- dcast(measuresMeanStdMelt, formula = subjectId + activity ~ variable,mean)
 dim(measuresMeanStdRecast) # View the dimension of the data set
 head(measuresMeanStdRecast, n=6) # View the first 6 observations
-
-# Export the tidy data set to a text file
-write.table(measuresMeanStdRecast, file="measuresMeanStdRecast.txt")
-
-
-
-
-
-
-
-# WHAT TO SUBMIT FOR THIS ASSIGNMENT:
-
-# 1) a tidy data set as described below, 
-# 2) a link to a Github repository with your script for performing the analysis,
-# 3) a code book that describes the variables, the data, and any transformations or work that you 
-# performed to clean up the data called CodeBook.md. 
-# You should also include a README.md in the repo with your scripts. 
-# This repo explains how all of the scripts work and how they are connected.
-
-
-
-
-
