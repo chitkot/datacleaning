@@ -43,10 +43,10 @@ With the exception subject and activity variables, all the measurement variables
 VARIABLE DESCRIPTION
 ====================
 
-* Variables 1 and 2 identify the subject in the experiments and the activities that the subjects performed.
+* Variables 1 and 2 identify the subjects in the experiments and the activities that the subjects performed.
 * Variables 3 through 88 are measurements of means or standard deviations. These variables measure the average value, for each subject and each activity, of the measurements on mean or standard deviation in the original data set.
 * Each variable is described in the table below. The variable type and the minimum and maximum values are also provided. 
-* The dataset contains 88 variables (the last 86 of which are measurement of mean and standard deviation)
+* The dataset contains 88 variables (the last 86 of which are measurement of mean and standard deviation) and 180 observations
 
 | Variable Number | Variable Name                     | Variable type | Variable description                                                                                                | Min     | Max     |
 |-----------------|-----------------------------------|---------------|---------------------------------------------------------------------------------------------------------------------|---------|---------|
