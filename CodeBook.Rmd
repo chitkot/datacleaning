@@ -11,10 +11,10 @@ The original dataset was part of an experiment conducted with 30 volunteers who 
 Information about these experiments is available at: 
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones.
 
-I created the subset of the dataset by following these steps:  
+This subset of the dataset was created by following the following steps:  
 
-1. Combined the the test and training sets into a larger dataset
-2. Extracted measurements of the mean and standard deviation and created a smaller dataset. I limited this new dataset to measurements of mean and standard deviations, by searching the variable names and extracting variables that had "mean" or "std" as part of the name. 
+1. Combined the test and training sets into a larger dataset
+2. Extracted measurements of the mean and standard deviation and created a smaller dataset. This new dataset was restricted to to measurements of mean and standard deviations, by searching the variable names and extracting variables that had "mean" or "std" as part of the name. 
 3. Merged this measurement dataset with data on subject and activities.
 4. Manually created new variable names and labeled the data with the appropriate names.
 5. Melted resulting dataset into a long, thin data set: Variables that identified subject and activities were preserved; all measurement variables were melted into a single column
@@ -37,9 +37,16 @@ With the exception subject and activity variables, all the measurement variables
 * Mean: Mean value
 * Std: Standard deviation
 * Mag: Magnitude
+* MeanFreq: Weighted average of the frequency components to obtain a mean frequency
+* angle: Angle between two vectors.
 
 VARIABLE DESCRIPTION
 ====================
+
+* Variables 1 and 2 identify the subject in the experiments and the activities that the subjects performed.
+* Variables 3 through 88 are measurements of means or standard deviations. These variables measure the average value, for each subject and each activity, of the measurements on mean or standard deviation in the original data set.
+* Each variable is described in the table below. The variable type and the minimum and maximum values are also provided. 
+* The dataset contains 88 variables (the last 86 of which are measurement of mean and standard deviation)
 
 | Variable Number | Variable Name                     | Variable type | Variable description                                                                                                | Min     | Max     |
 |-----------------|-----------------------------------|---------------|---------------------------------------------------------------------------------------------------------------------|---------|---------|

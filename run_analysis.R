@@ -1,8 +1,8 @@
 # GETTING AND CLEANING DATA: COURSE PROJECT ASSIGNMENT
 
-# NOTE: THIS SCRIPT ASSUMES THAT THE SUMSUNG DATA HAVE BEEN DOWNLOADED AND PLACED IN THE WORKING DIRECTORY,
-# particularly the following files: X_test.txt, y_test.tx subject_test.tx, X-train.tx, y_train.tx, 
-# subject_train.tx, features.tx, activity_labels.txt 
+# NOTE: THIS SCRIPT ASSUMES THAT THE SUMSUNG DATA HAVE BEEN DOWNLOADED AND PLACED IN THE WORKING DIRECTORY.
+# The following files would need to be in the directory: "X_test.txt", "X-train.tx", "y_test.tx", "y_train.tx", "subject_test.tx",   
+# "subject_train.tx", "features.tx", and "activity_labels.txt" 
 # THE ORIGINAL DATASET IS AVAILABLE AT: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
 

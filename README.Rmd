@@ -21,7 +21,7 @@ This subset of the larger dataset was generated using the following steps:
 For each record in the dataset, it is provided the following:
 =============================================================
 * The identification number for the subject who performed the activity
-* The description of the activity that the subject perfromed 
+* The description of the activity that the subject performed 
 * The average value, for each subject and each activity, for each measurement on the mean and standard deviation of the variables in the original dataset.
 
 The dataset includes the following files:
@@ -29,6 +29,6 @@ The dataset includes the following files:
 * 'README.txt'
 * 'measuresMeanStdRecast.txt': Tidy dataset created using the steps described above
 * 'CodeBook.md': Codebook describing the variables
-* 'run_analysis.R': The script for performing the analysis and describing all the data cleaning work performed.
+* 'run_analysis.R': The script for performing the analysis. The script describes all the data cleaning work performed.
 
 
